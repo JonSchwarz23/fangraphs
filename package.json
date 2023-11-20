@@ -1,5 +1,5 @@
 {
-  "name": "enter-name-here",
+  "name": "@jonschwarz23/fangraphs",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -17,7 +17,10 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "ts-node": "^10.9.1"
+    "@types/cheerio": "^0.22.34",
+    "cheerio": "^1.0.0-rc.12",
+    "ts-node": "^10.9.1",
+    "zod": "^3.22.4"
   },
   "files": [
     "/dist"
