@@ -1,18 +1,21 @@
-import { getBattingLeaders } from "./fangraphs";
-import { DataType, MaxNumberOfResults, Stat } from "./types";
+import { getMajorLeagueLeaders, getPlayerInfo } from "./fangraphs";
+import { DataType, MaxNumberOfResults, Position, Stat, Team } from "./types";
 
 const test = async () => {
-    const result = await getBattingLeaders({
+    const result = await getMajorLeagueLeaders({
+        stats: Stat.Pitching,
         dataType: DataType.Advanced,
-        stats: Stat.Batting,
         season: 2023,
         numberOfResults: MaxNumberOfResults,
-        plateAppearancesQualifier: "y",
+        inningsPitchedQualifier: "0",
     });
 
     for (const player of result) {
-        console.log(`${player.team}: ${player.name} - ${player.strikeoutRate}`);
+        console.log(`${player.team}: ${player.name} - ${player.skillInteractiveEarnedRunAverage}`);
     }
+
+    const playerInfo = await getPlayerInfo(result[0].id);
+    console.log(playerInfo);
 };
 
 test();

@@ -1,20 +1,18 @@
-// enum Position {
-//     All = "all",
-//     Pitcher = "p",
-//     Catcher = "c",
-//     FirstBase = "1b",
-//     SecondBase = "2b",
-//     ThirdBase = "3b",
-//     Shortstop = "ss",
-//     Outfield = "of",
-//     RightField = "rf",
-//     CenterField = "cf",
-//     LeftField = "lf",
-//     DesignatedHitter = "dh",
-//     NoPosition = "np",
-// }
-
-import { type } from "os";
+enum Position {
+    All = "all",
+    Pitcher = "p",
+    Catcher = "c",
+    FirstBase = "1b",
+    SecondBase = "2b",
+    ThirdBase = "3b",
+    Shortstop = "ss",
+    Outfield = "of",
+    RightField = "rf",
+    CenterField = "cf",
+    LeftField = "lf",
+    DesignatedHitter = "dh",
+    NonPitcher = "np",
+}
 
 const MaxNumberOfResults = 2000000000;
 
@@ -126,6 +124,8 @@ type PlateAppearancesQualifier =
     | "9500"
     | "10000";
 
+type InningsPitchedQualifier = PlateAppearancesQualifier;
+
 enum SeasonType {
     Regular = "",
     Postseason = "Y",
@@ -139,44 +139,58 @@ enum DataType {
     Dashboard = 8,
     Standard = 0,
     Advanced = 1,
+    BattedBall = 2,
 }
 
-type BattingLeadersParametersBase = {
-    stats: Stat.Batting;
+type LeadersParametersBaseWithoutSeasons = {
     league?: League;
     team?: Team;
     seasonType?: SeasonType;
-    plateAppearancesQualifier?: PlateAppearancesQualifier;
     numberOfResults?: number;
 };
 
-type BattingLeadersParametersSingleSeason = BattingLeadersParametersBase & {
+type LeadersParametersBaseSingleSeason = LeadersParametersBaseWithoutSeasons & {
     season?: number;
     startSeason?: never;
     endSeason?: never;
 };
 
-type BattingLeadersParametersMultipleSeasons = BattingLeadersParametersBase & {
+type LeadersParametersBaseMultipleSeasons = LeadersParametersBaseWithoutSeasons & {
     startSeason?: number;
     endSeason?: number;
     season?: never;
 };
 
-type BattingLeadersParametersSeasons = BattingLeadersParametersSingleSeason | BattingLeadersParametersMultipleSeasons;
+type LeadersParametersBase = LeadersParametersBaseSingleSeason | LeadersParametersBaseMultipleSeasons;
 
-type DashboardBattingLeaderParameters = BattingLeadersParametersSeasons & {
-    dataType: DataType.Dashboard;
+type BattingLeadersParametersBase = LeadersParametersBase & {
+    stats: Stat.Batting;
+    plateAppearancesQualifier?: PlateAppearancesQualifier;
+    position?: Position;
 };
 
-type StandardBattingLeaderParameters = BattingLeadersParametersSeasons & {
-    dataType: DataType.Standard;
+type PitchingLeadersParametersBase = LeadersParametersBase & {
+    stats: Stat.Pitching;
+    inningsPitchedQualifier?: InningsPitchedQualifier;
 };
 
-type AdvancedBattingLeaderParameters = BattingLeadersParametersSeasons & {
-    dataType: DataType.Advanced;
-};
+type DashboardBattingLeaderParameters = BattingLeadersParametersBase & { dataType: DataType.Dashboard };
+type StandardBattingLeaderParameters = BattingLeadersParametersBase & { dataType: DataType.Standard };
+type AdvancedBattingLeaderParameters = BattingLeadersParametersBase & { dataType: DataType.Advanced };
+type BattedBallBattingLeaderParameters = BattingLeadersParametersBase & { dataType: DataType.BattedBall };
 
-type BattingLeadersParameters = DashboardBattingLeaderParameters | StandardBattingLeaderParameters | AdvancedBattingLeaderParameters;
+type DashboardPitchingLeaderParameters = PitchingLeadersParametersBase & { dataType: DataType.Dashboard };
+type StandardPitchingLeaderParameters = PitchingLeadersParametersBase & { dataType: DataType.Standard };
+type AdvancedPitchingLeaderParameters = PitchingLeadersParametersBase & { dataType: DataType.Advanced };
+
+type LeadersParameters =
+    | DashboardBattingLeaderParameters
+    | StandardBattingLeaderParameters
+    | AdvancedBattingLeaderParameters
+    | BattedBallBattingLeaderParameters
+    | DashboardPitchingLeaderParameters
+    | StandardPitchingLeaderParameters
+    | AdvancedPitchingLeaderParameters;
 
 export {
     League,
@@ -185,9 +199,14 @@ export {
     DataType,
     PlateAppearancesQualifier,
     Stat,
+    Position,
     MaxNumberOfResults,
-    BattingLeadersParameters,
+    LeadersParameters,
     DashboardBattingLeaderParameters,
     StandardBattingLeaderParameters,
     AdvancedBattingLeaderParameters,
+    BattedBallBattingLeaderParameters,
+    DashboardPitchingLeaderParameters,
+    StandardPitchingLeaderParameters,
+    AdvancedPitchingLeaderParameters,
 };

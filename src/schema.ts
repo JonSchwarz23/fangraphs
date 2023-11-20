@@ -1,4 +1,3 @@
-import { type } from "os";
 import { z } from "zod";
 
 const team = z.enum([
@@ -43,7 +42,7 @@ const team = z.enum([
     "10 Tms",
 ]);
 
-const BattingDashboardResponseSchema = z.object({
+const DashboardBattingResponseSchema = z.object({
     id: z.string().min(1),
     name: z.string().min(1),
     team: team,
@@ -68,9 +67,9 @@ const BattingDashboardResponseSchema = z.object({
     defense: z.number(),
     winsAboveReplacement: z.number(),
 });
-type BattingDashboardResponse = z.infer<typeof BattingDashboardResponseSchema>;
+type DashboardBattingResponse = z.infer<typeof DashboardBattingResponseSchema>;
 
-const BattingStandardResponseSchema = z.object({
+const StandardBattingResponseSchema = z.object({
     id: z.string().min(1),
     name: z.string().min(1),
     team: team,
@@ -95,9 +94,9 @@ const BattingStandardResponseSchema = z.object({
     caughtStealing: z.number().int().nonnegative(),
     battingAverage: z.number().nonnegative(),
 });
-type BattingStandardResponse = z.infer<typeof BattingStandardResponseSchema>;
+type StandardBattingResponse = z.infer<typeof StandardBattingResponseSchema>;
 
-const BattingAdvancedResponseSchema = z.object({
+const AdvancedBattingResponseSchema = z.object({
     id: z.string().min(1),
     name: z.string().min(1),
     team: team,
@@ -120,13 +119,135 @@ const BattingAdvancedResponseSchema = z.object({
     weightedOnBaseAverage: z.number().nonnegative(),
     weightedRunsCreatedPlus: z.number().int().optional(),
 });
-type BattingAdvancedResponse = z.infer<typeof BattingAdvancedResponseSchema>;
+type AdvancedBattingResponse = z.infer<typeof AdvancedBattingResponseSchema>;
+
+const BattedBallBattingResponseSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    team: team,
+    battingAverageOnBallsInPlay: z.number().nonnegative(),
+    groundBallToFlyBallRatio: z.number().nonnegative(),
+    lineDrivePercentage: z.number().nonnegative(),
+    groundBallPercentage: z.number().nonnegative(),
+    flyBallPercentage: z.number().nonnegative(),
+    infieldFlyBallPercentage: z.number().nonnegative(),
+    homeRunPerFlyBallRatio: z.number().nonnegative(),
+    infieldHits: z.number().int().nonnegative(),
+    infieldHitPercentage: z.number().nonnegative(),
+    buntHits: z.number().int().nonnegative(),
+    buntHitPercentage: z.number().nonnegative(),
+    pullPercentage: z.number().nonnegative().optional(),
+    centerFieldPercentage: z.number().nonnegative().optional(),
+    oppositeFieldPercentage: z.number().nonnegative().optional(),
+    softHitPercentage: z.number().nonnegative().optional(),
+    mediumHitPercentage: z.number().nonnegative().optional(),
+    hardHitPercentage: z.number().nonnegative().optional(),
+});
+type BattedBallBattingResponse = z.infer<typeof BattedBallBattingResponseSchema>;
+
+const DashboardPitchingResponseSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    team: team,
+    wins: z.number().int().nonnegative(),
+    losses: z.number().int().nonnegative(),
+    saves: z.number().int().nonnegative(),
+    games: z.number().int().nonnegative(),
+    gamesStarted: z.number().int().nonnegative(),
+    inningsPitched: z.number().nonnegative(),
+    strikeoutsPerNineInnings: z.number().nonnegative(),
+    walksPerNineInnings: z.number().nonnegative(),
+    homeRunsPerNineInnings: z.number().nonnegative(),
+    battingAverageOnBallsInPlay: z.number().nonnegative(),
+    leftOnBasePercentage: z.number().nonnegative(),
+    groundBallPercentage: z.number().nonnegative(),
+    homeRunPerFlyBallRatio: z.number().nonnegative(),
+    fastballVelocity: z.number().nonnegative().optional(),
+    earnedRunAverage: z.number().nonnegative(),
+    expectedEarnedRunAverage: z.number().nonnegative().optional(),
+    fieldingIndependentPitching: z.number().nonnegative(),
+    expectedFieldingIndependentPitching: z.number().nonnegative(),
+    winsAboveReplacement: z.number(),
+});
+type DashboardPitchingResponse = z.infer<typeof DashboardPitchingResponseSchema>;
+
+const StandardPitchingResponseSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    team: team,
+    wins: z.number().int().nonnegative(),
+    losses: z.number().int().nonnegative(),
+    era: z.number().nonnegative(),
+    games: z.number().int().nonnegative(),
+    gamesStarted: z.number().int().nonnegative(),
+    completeGames: z.number().int().nonnegative(),
+    shutouts: z.number().int().nonnegative(),
+    saves: z.number().int().nonnegative(),
+    holds: z.number().int().nonnegative(),
+    blownSaves: z.number().int().nonnegative(),
+    inningsPitched: z.number().nonnegative(),
+    totalBattersFaced: z.number().int().nonnegative(),
+    hits: z.number().int().nonnegative(),
+    runs: z.number().int().nonnegative(),
+    earnedRuns: z.number().int().nonnegative(),
+    homeRuns: z.number().int().nonnegative(),
+    walks: z.number().int().nonnegative(),
+    intentionalWalks: z.number().int().nonnegative(),
+    hitByPitch: z.number().int().nonnegative(),
+    wildPitches: z.number().int().nonnegative(),
+    balks: z.number().int().nonnegative(),
+    strikeouts: z.number().int().nonnegative(),
+});
+type StandardPitchingResponse = z.infer<typeof StandardPitchingResponseSchema>;
+
+const AdvancedPitchingResponseSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    team: team,
+    strikeoutsPerNineInnings: z.number().nonnegative(),
+    walksPerNineInnings: z.number().nonnegative(),
+    strikeoutToWalkRatio: z.number().nonnegative(),
+    homeRunsPerNineInnings: z.number().nonnegative(),
+    strikeoutPercentage: z.number().nonnegative(),
+    walkPercentage: z.number().nonnegative(),
+    strikeoutMinusWalkPercentage: z.number(),
+    battingAverageAgainst: z.number().nonnegative(),
+    walkHitsPerInningsPitched: z.number().nonnegative(),
+    battingAverageOnBallsInPlay: z.number().nonnegative(),
+    leftOnBasePercentage: z.number(),
+    earnedRunAverageMinus: z.number().nonnegative(),
+    fieldingIndependentPitchingMinus: z.number(),
+    expectedFieldingIndependentPitchingMinus: z.number().nonnegative(),
+    earnedRunAverage: z.number().nonnegative(),
+    fieldingIndependentPitching: z.number(),
+    earnedRunAverageMinusFieldingIndependentPitching: z.number(),
+    expectedFieldingIndependentPitching: z.number().nonnegative(),
+    skillInteractiveEarnedRunAverage: z.number().nonnegative(),
+});
+type AdvancedPitchingResponse = z.infer<typeof AdvancedPitchingResponseSchema>;
+
+const PlayerInfoSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    birthDate: z.date(),
+});
+type PlayerInfo = z.infer<typeof PlayerInfoSchema>;
 
 export {
-    BattingDashboardResponse,
-    BattingDashboardResponseSchema,
-    BattingStandardResponse,
-    BattingStandardResponseSchema,
-    BattingAdvancedResponse,
-    BattingAdvancedResponseSchema,
+    DashboardBattingResponse,
+    DashboardBattingResponseSchema,
+    StandardBattingResponse,
+    StandardBattingResponseSchema,
+    AdvancedBattingResponse,
+    AdvancedBattingResponseSchema,
+    BattedBallBattingResponse,
+    BattedBallBattingResponseSchema,
+    DashboardPitchingResponse,
+    DashboardPitchingResponseSchema,
+    StandardPitchingResponse,
+    StandardPitchingResponseSchema,
+    AdvancedPitchingResponse,
+    AdvancedPitchingResponseSchema,
+    PlayerInfo,
+    PlayerInfoSchema,
 };
