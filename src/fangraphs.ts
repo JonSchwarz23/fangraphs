@@ -18,6 +18,8 @@ import {
     AdvancedPitchingResponseSchema,
     BattedBallBattingResponse,
     BattedBallBattingResponseSchema,
+    BatterScouting,
+    BatterScoutingSchema,
     DashboardBattingResponse,
     DashboardBattingResponseSchema,
     DashboardPitchingResponse,
@@ -29,8 +31,8 @@ import {
     StandardPitchingResponse,
     StandardPitchingResponseSchema,
 } from "./schema";
-import { get } from "http";
-import { is } from "cheerio/lib/api/traversing";
+
+import { scoutingBattersURL } from "./urls";
 
 function isValidNumber(value: string): boolean {
     if (value === "") return false;
@@ -41,6 +43,10 @@ function isValidNumber(value: string): boolean {
 function toNumber(value: string): number {
     if (!isValidNumber(value)) throw new Error(`Invalid number: ${value}`);
     return Number(value);
+}
+
+function capitalize(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function getChildText(row: { find: any }, childIndex: number): string {
@@ -398,7 +404,6 @@ async function getMajorLeagueLeaders(parameters: LeadersParameters): Promise<any
 
 async function getPlayerInfo(id: string): Promise<PlayerInfo> {
     const url = new URL(`https://www.fangraphs.com/players/player/${id}`);
-
     const response = await fetch(url.toString());
     const html = await response.text();
 
@@ -415,4 +420,19 @@ async function getPlayerInfo(id: string): Promise<PlayerInfo> {
     return PlayerInfoSchema.parse(result);
 }
 
-export { getMajorLeagueLeaders, getPlayerInfo };
+async function getBatterScouting(): Promise<BatterScouting[]> {
+    const response = await fetch(scoutingBattersURL);
+    const json = await response.json();
+    const rows: any[] = json["prospects"];
+    const result: BatterScouting[] = [];
+    for (const r of rows) {
+        const row = $(r);
+        const response: any = {};
+
+        result.push(BatterScoutingSchema.parse(response));
+    }
+
+    return result;
+}
+
+export { getMajorLeagueLeaders, getPlayerInfo, getBatterScouting };

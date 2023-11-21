@@ -41,6 +41,36 @@ const team = z.enum([
     "9 Tms",
     "10 Tms",
 ]);
+const position = z.enum(["1B", "2B", "3B", "C", "CF", "DH", "LF", "RF", "SS", "SP", "SIRP", "MIRP"]);
+const level = z.enum(["MLB", "AAA", "AA", "A+", "A", "CPX", "DSL"]);
+const ability = z.enum([
+    "20",
+    "20+",
+    "25",
+    "25+",
+    "30",
+    "30+",
+    "35",
+    "35+",
+    "40",
+    "40+",
+    "45",
+    "45+",
+    "50",
+    "50+",
+    "55",
+    "55+",
+    "60",
+    "60+",
+    "65",
+    "65+",
+    "70",
+    "70+",
+    "75",
+    "75+",
+    "80",
+    "80+",
+]);
 
 const DashboardBattingResponseSchema = z.object({
     id: z.string().min(1),
@@ -233,6 +263,33 @@ const PlayerInfoSchema = z.object({
 });
 type PlayerInfo = z.infer<typeof PlayerInfoSchema>;
 
+const BatterScoutingSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    organization: team,
+    position: z.array(position).nonempty(),
+    currentLevel: level,
+    rank: z.number().int().nonnegative().optional(),
+    organizationRank: z.number().int().nonnegative(),
+    hitAbility: ability.optional(),
+    projectedHitAbility: ability.optional(),
+    gamePowerAbility: ability.optional(),
+    projectedGamePowerAbility: ability.optional(),
+    rawPowerAbility: ability.optional(),
+    projectedRawPowerAbility: ability.optional(),
+    speedAbility: ability.optional(),
+    projectedSpeedAbility: ability.optional(),
+    futureValue: ability,
+    plateAppearances: z.number().int().nonnegative(),
+    onBasePercentage: z.number().nonnegative(),
+    sluggingPercentage: z.number().nonnegative(),
+    isolatedPower: z.number().nonnegative(),
+    walkRate: z.number().nonnegative(),
+    strikeoutRate: z.number().nonnegative(),
+    weightedRunsCreatedPlus: z.number().int(),
+});
+type BatterScouting = z.infer<typeof BatterScoutingSchema>;
+
 export {
     DashboardBattingResponse,
     DashboardBattingResponseSchema,
@@ -250,4 +307,6 @@ export {
     AdvancedPitchingResponseSchema,
     PlayerInfo,
     PlayerInfoSchema,
+    BatterScouting,
+    BatterScoutingSchema,
 };
