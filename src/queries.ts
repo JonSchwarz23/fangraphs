@@ -22,6 +22,25 @@ type LeadersQueryInternal = {
     sortstat: string;
 } & { [key: string]: string };
 
+type ProspectsListQueryInternal = {
+    pos: string;
+    lg: string;
+    stats: string;
+    qual: string;
+    type: string;
+    team: string;
+    season: string;
+    seasonend: string;
+    draft: string;
+    valueheader: string;
+    quickleaderboard: string;
+} & { [key: string]: string };
+
+type PlayerInfoQueryInternal = {
+    playerid: string;
+    position: string;
+} & { [key: string]: string };
+
 enum Position {
     All = "all",
     Pitcher = "p",
@@ -118,6 +137,11 @@ type PitcherLeadersQuery = LeadersQueryBase & {
     minimumInningsPitched?: number | "y";
 };
 
+type PlayerInfoQuery = {
+    id: string;
+    position: string;
+};
+
 //TODO: this will need to be updated when the season changes
 const currentSeason = "2023";
 
@@ -172,4 +196,23 @@ function convertToInternalPitching(query: PitcherLeadersQuery): LeadersQueryInte
     };
 }
 
-export { Position, League, Handness, Team, SeasonType, BatterLeadersQuery, PitcherLeadersQuery, convertToInternalBatting, convertToInternalPitching };
+function convertToInternalPlayerInfo(query: PlayerInfoQuery): PlayerInfoQueryInternal {
+    return {
+        playerid: query.id,
+        position: query.position,
+    };
+}
+
+export {
+    Position,
+    League,
+    Handness,
+    Team,
+    SeasonType,
+    BatterLeadersQuery,
+    PitcherLeadersQuery,
+    convertToInternalBatting,
+    convertToInternalPitching,
+    convertToInternalPlayerInfo,
+    PlayerInfoQuery,
+};
