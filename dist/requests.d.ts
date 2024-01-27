@@ -1,0 +1,10 @@
+import { BatterLeadersQuery, PitcherLeadersQuery, PlayerInfoQuery } from "./queries";
+import { MajorLeagueBatter } from "./responses/majorLeagueBatter";
+import { MajorLeaguePitcher } from "./responses/majorLeaguePitcher";
+import { PlayerInfo } from "./responses/playerInfo";
+import { ProspectBoardPlayer } from "./responses/prospectBoardPlayer";
+declare function getMajorLeaguePitchingLeaders(params?: PitcherLeadersQuery): Promise<MajorLeaguePitcher[]>;
+declare function getMajorLeagueBattingLeaders(params?: BatterLeadersQuery): Promise<MajorLeagueBatter[]>;
+declare function getPlayerInfo(params: PlayerInfoQuery): Promise<PlayerInfo>;
+declare function getProspectBoard(): Promise<ProspectBoardPlayer[]>;
+export { getMajorLeagueBattingLeaders, getMajorLeaguePitchingLeaders, getPlayerInfo, getProspectBoard };

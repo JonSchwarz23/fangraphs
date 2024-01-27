@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.helloWorld = void 0;
-var helloWorld_1 = require("./helloWorld");
-Object.defineProperty(exports, "helloWorld", { enumerable: true, get: function () { return helloWorld_1.helloWorld; } });
+exports.getMajorLeaguePitchingLeaders = exports.getMajorLeagueBattingLeaders = exports.getPlayerInfo = exports.getProspectBoard = void 0;
+var requests_1 = require("./requests");
+Object.defineProperty(exports, "getProspectBoard", { enumerable: true, get: function () { return requests_1.getProspectBoard; } });
+Object.defineProperty(exports, "getPlayerInfo", { enumerable: true, get: function () { return requests_1.getPlayerInfo; } });
+Object.defineProperty(exports, "getMajorLeagueBattingLeaders", { enumerable: true, get: function () { return requests_1.getMajorLeagueBattingLeaders; } });
+Object.defineProperty(exports, "getMajorLeaguePitchingLeaders", { enumerable: true, get: function () { return requests_1.getMajorLeaguePitchingLeaders; } });
