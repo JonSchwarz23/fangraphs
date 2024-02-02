@@ -45,7 +45,6 @@ async function getPlayerInfo(params) {
     const response = await fetch(url.toString());
     const json = await response.json();
     const player = json.playerInfo;
-    console.log(player);
     return playerInfo_1.PlayerInfoSchema.parse(player);
 }
 exports.getPlayerInfo = getPlayerInfo;

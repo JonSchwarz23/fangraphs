@@ -55,7 +55,6 @@ async function getPlayerInfo(params: PlayerInfoQuery): Promise<PlayerInfo> {
     const json = await response.json();
     const player = json.playerInfo;
 
-    console.log(player);
     return PlayerInfoSchema.parse(player);
 }
 
