@@ -13,8 +13,8 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     PlayerId: z.ZodNumber;
     MLBAMId: z.ZodNumber;
     MinorMasterId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
-    KBOId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
-    KBOBISId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
+    KBOId: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
+    KBOBISId: z.ZodOptional<z.ZodNullable<z.ZodNumber>>;
     AltMMId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     RRId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     FirstName: z.ZodString;
@@ -62,8 +62,8 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     minSeason: number;
     maxSeason: number;
     MinorMasterId?: string | null | undefined;
-    KBOId?: string | null | undefined;
-    KBOBISId?: string | null | undefined;
+    KBOId?: number | null | undefined;
+    KBOBISId?: number | null | undefined;
     AltMMId?: string | null | undefined;
     RRId?: string | null | undefined;
     NameKorean?: string | null | undefined;
@@ -91,8 +91,8 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     minSeason: number;
     maxSeason: number;
     MinorMasterId?: string | null | undefined;
-    KBOId?: string | null | undefined;
-    KBOBISId?: string | null | undefined;
+    KBOId?: number | null | undefined;
+    KBOBISId?: number | null | undefined;
     AltMMId?: string | null | undefined;
     RRId?: string | null | undefined;
     BirthDate?: unknown;
@@ -144,8 +144,8 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     minSeason: number;
     maxSeason: number;
     MinorMasterId?: string | null | undefined;
-    KBOId?: string | null | undefined;
-    KBOBISId?: string | null | undefined;
+    KBOId?: number | null | undefined;
+    KBOBISId?: number | null | undefined;
     AltMMId?: string | null | undefined;
     RRId?: string | null | undefined;
     BirthDate?: unknown;
