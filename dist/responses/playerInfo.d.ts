@@ -12,7 +12,7 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     UPId: z.ZodString;
     PlayerId: z.ZodNumber;
     MLBAMId: z.ZodNumber;
-    MinorMasterId: z.ZodString;
+    MinorMasterId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     KBOId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     KBOBISId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     AltMMId: z.ZodOptional<z.ZodNullable<z.ZodString>>;
@@ -37,7 +37,7 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     CurrentLeague: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     HOF: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     Age: z.ZodNumber;
-    servicetime: z.ZodString;
+    servicetime: z.ZodOptional<z.ZodNullable<z.ZodString>>;
     minSeason: z.ZodNumber;
     maxSeason: z.ZodNumber;
 }, "strict", z.ZodTypeAny, {
@@ -47,7 +47,6 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     UPId: string;
     PlayerId: number;
     MLBAMId: number;
-    MinorMasterId: string;
     FirstName: string;
     LastName: string;
     firstLastName: string;
@@ -60,9 +59,9 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     Debut: string;
     LastGame: string;
     RookieSeason: number;
-    servicetime: string;
     minSeason: number;
     maxSeason: number;
+    MinorMasterId?: string | null | undefined;
     KBOId?: string | null | undefined;
     KBOBISId?: string | null | undefined;
     AltMMId?: string | null | undefined;
@@ -72,6 +71,7 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     Retired?: string | null | undefined;
     CurrentLeague?: string | null | undefined;
     HOF?: string | null | undefined;
+    servicetime?: string | null | undefined;
 }, {
     Bats: HittingSide;
     Age: number;
@@ -79,7 +79,6 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     UPId: string;
     PlayerId: number;
     MLBAMId: number;
-    MinorMasterId: string;
     FirstName: string;
     LastName: string;
     firstLastName: string;
@@ -89,9 +88,9 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     BirthCity: string;
     College: string;
     RookieSeason: number;
-    servicetime: string;
     minSeason: number;
     maxSeason: number;
+    MinorMasterId?: string | null | undefined;
     KBOId?: string | null | undefined;
     KBOBISId?: string | null | undefined;
     AltMMId?: string | null | undefined;
@@ -104,10 +103,11 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     Retired?: string | null | undefined;
     CurrentLeague?: string | null | undefined;
     HOF?: string | null | undefined;
+    servicetime?: string | null | undefined;
 }>, {
     id: number;
     mlbId: number;
-    minorLeagueId: string;
+    minorLeagueId: string | null | undefined;
     firstName: string;
     lastName: string;
     fullName: string;
@@ -132,7 +132,6 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     UPId: string;
     PlayerId: number;
     MLBAMId: number;
-    MinorMasterId: string;
     FirstName: string;
     LastName: string;
     firstLastName: string;
@@ -142,9 +141,9 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     BirthCity: string;
     College: string;
     RookieSeason: number;
-    servicetime: string;
     minSeason: number;
     maxSeason: number;
+    MinorMasterId?: string | null | undefined;
     KBOId?: string | null | undefined;
     KBOBISId?: string | null | undefined;
     AltMMId?: string | null | undefined;
@@ -157,6 +156,7 @@ declare const PlayerInfoSchema: z.ZodEffects<z.ZodObject<{
     Retired?: string | null | undefined;
     CurrentLeague?: string | null | undefined;
     HOF?: string | null | undefined;
+    servicetime?: string | null | undefined;
 }>;
 type PlayerInfo = z.infer<typeof PlayerInfoSchema>;
 export { PlayerInfoSchema, PlayerInfo };

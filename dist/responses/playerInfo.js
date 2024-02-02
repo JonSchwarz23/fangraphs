@@ -21,7 +21,7 @@ const PlayerInfoSchema = zod_1.z
     UPId: zod_1.z.string().min(1),
     PlayerId: zod_1.z.number().int(),
     MLBAMId: zod_1.z.number().int(),
-    MinorMasterId: zod_1.z.string().min(1),
+    MinorMasterId: zod_1.z.string().min(1).nullish(),
     KBOId: zod_1.z.string().min(1).nullish(),
     KBOBISId: zod_1.z.string().min(1).nullish(),
     AltMMId: zod_1.z.string().min(1).nullish(),
@@ -46,7 +46,7 @@ const PlayerInfoSchema = zod_1.z
     CurrentLeague: zod_1.z.string().nullish(),
     HOF: zod_1.z.string().nullish(),
     Age: zod_1.z.number().int(),
-    servicetime: zod_1.z.string().regex(new RegExp("[0-9]+.[0-9]+")),
+    servicetime: zod_1.z.string().regex(new RegExp("[0-9]+.[0-9]+")).nullish(),
     minSeason: zod_1.z.number().int(),
     maxSeason: zod_1.z.number().int(),
 })

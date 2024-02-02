@@ -16,8 +16,8 @@ const test = async () => {
     console.log(pitchers);
 
     const Lindor = await getPlayerInfo({
-        id: "12916",
-        position: "SS",
+        id: "19788",
+        position: "2B",
     });
     console.log(Lindor);
 

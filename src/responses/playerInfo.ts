@@ -19,7 +19,7 @@ const PlayerInfoSchema = z
         UPId: z.string().min(1),
         PlayerId: z.number().int(),
         MLBAMId: z.number().int(),
-        MinorMasterId: z.string().min(1),
+        MinorMasterId: z.string().min(1).nullish(),
         KBOId: z.string().min(1).nullish(),
         KBOBISId: z.string().min(1).nullish(),
         AltMMId: z.string().min(1).nullish(),
@@ -44,7 +44,7 @@ const PlayerInfoSchema = z
         CurrentLeague: z.string().nullish(),
         HOF: z.string().nullish(),
         Age: z.number().int(),
-        servicetime: z.string().regex(new RegExp("[0-9]+.[0-9]+")),
+        servicetime: z.string().regex(new RegExp("[0-9]+.[0-9]+")).nullish(),
         minSeason: z.number().int(),
         maxSeason: z.number().int(),
     })
