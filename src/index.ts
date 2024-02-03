@@ -1,1 +1,1 @@
-export {getProspectBoard, getPlayerInfo, getMajorLeagueBattingLeaders, getMajorLeaguePitchingLeaders} from "./requests"
+export { FangraphsClient } from "./requests"
