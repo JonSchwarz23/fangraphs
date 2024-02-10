@@ -522,7 +522,7 @@ declare const MajorLeagueBatterSchema: z.ZodEffects<z.ZodObject<{
     caughtStealing: number;
     battingAverage: number;
     groundBalls: number;
-    flyBalls: string;
+    flyBalls: number;
     lineDrives: number;
     infieldFlyBalls: number;
     totalPitchesFaced: number;

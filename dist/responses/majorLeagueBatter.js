@@ -204,7 +204,7 @@ const MajorLeagueBatterSchema = zod_1.z
         caughtStealing: obj.CS,
         battingAverage: obj.AVG,
         groundBalls: obj.GB,
-        flyBalls: obj.FB.toString(),
+        flyBalls: obj.FB,
         lineDrives: obj.LD,
         infieldFlyBalls: obj.IFFB,
         totalPitchesFaced: obj.Pitches,
